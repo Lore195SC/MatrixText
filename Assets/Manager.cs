@@ -1,3 +1,4 @@
+using System.Collections;
 using TMPro;
 using UnityEngine;
 
@@ -15,6 +16,7 @@ public class Manager : MonoBehaviour
     bool _itsStarted;
     private bool isWords1Completed = false;
     public LoadBar Barmanager;
+    public Dots DotsManager;
 
     void Start()
     {
@@ -111,10 +113,17 @@ public class Manager : MonoBehaviour
 
     public void LoadComplete()
     {
+        StartCoroutine(Dots());
         text.SetActive(true);
         Bar.SetActive(false);
         DisplayNextWord();
         _itsStarted = true;
         
+    }
+    private IEnumerator Dots()
+    {
+        DotsManager.OnStartDots();
+        yield return new WaitForSeconds(3);
+   
     }
 }
